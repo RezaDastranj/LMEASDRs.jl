@@ -1,0 +1,13 @@
+name = "LMEASDRs"
+uuid = "843c29a6-7941-463b-bfb9-b825edc5b6f0"
+authors = ["Reza Dastranj", "Martin Kolář"]
+version = "1.0.0-DEV"
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
