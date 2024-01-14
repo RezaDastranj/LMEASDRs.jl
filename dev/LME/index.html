@@ -50,7 +50,7 @@ Gadfly.with_theme(:dark) do
         Guide.ylabel(&quot;Mortality(log)&quot;),  # Y-axis label
         Guide.colorkey(title=&quot;Age&quot;)  # Color key title
     )
-end</code></pre><img src="61f64429.svg" alt="Example block output"/><pre><code class="language-julia hljs"># Define a subset of the DataFrame based on specific conditions (Country, gender, and age groups)
+end</code></pre><img src="5c7c3916.svg" alt="Example block output"/><pre><code class="language-julia hljs"># Define a subset of the DataFrame based on specific conditions (Country, gender, and age groups)
 subset_df = filter(row -&gt; row.Country == &quot;AUT&quot; &amp;&amp; row.gender == &quot;Male&quot; &amp;&amp; row.age in [&quot;000&quot;, &quot;010&quot;, &quot;020&quot;, &quot;040&quot;, &quot;050&quot;, &quot;060&quot;, &quot;070&quot;, &quot;080&quot;], df)
 
 # Define custom LaTeX fonts for Gadfly plot aesthetics
@@ -81,7 +81,7 @@ Gadfly.plot(
     Guide.xlabel(&quot;Year&quot;),                   # X-axis label
     Guide.ylabel(&quot;Mortality(log)&quot;),         # Y-axis label
     Guide.colorkey(title=&quot;Age&quot;)             # Color key title
-)</code></pre><img src="4eee7a3e.svg" alt="Example block output"/><pre><code class="language-julia hljs"># Apply a dark theme to Gadfly for improved visualization in a dark background
+)</code></pre><img src="e23fc585.svg" alt="Example block output"/><pre><code class="language-julia hljs"># Apply a dark theme to Gadfly for improved visualization in a dark background
 Gadfly.with_theme(:dark) do
     # Set the default plot size to 14cm x 8cm
     set_default_plot_size(14cm, 8cm)
@@ -94,7 +94,7 @@ Gadfly.with_theme(:dark) do
         color=:Country,             # Color differentiation based on the &#39;Country&#39; column
         Geom.violin                 # Violin geometry for displaying distribution
     )
-end</code></pre><img src="9d0d53cb.svg" alt="Example block output"/><h2 id="Modelling-ASDRs-using-MixedModels.jl"><a class="docs-heading-anchor" href="#Modelling-ASDRs-using-MixedModels.jl">Modelling ASDRs using MixedModels.jl</a><a id="Modelling-ASDRs-using-MixedModels.jl-1"></a><a class="docs-heading-anchor-permalink" href="#Modelling-ASDRs-using-MixedModels.jl" title="Permalink"></a></h2><p>We use the <code>MixedModels.jl</code> package to fit a linear mixed-effects model to mortality data. We consider a general model with random effects specified for &#39;cgx&#39; grouping variable. <code>REML</code> (Restricted Maximum Likelihood) is employed for parameter estimation:</p><pre><code class="language-julia hljs">using MixedModels
+end</code></pre><img src="b8e33b61.svg" alt="Example block output"/><h2 id="Modelling-ASDRs-using-MixedModels.jl"><a class="docs-heading-anchor" href="#Modelling-ASDRs-using-MixedModels.jl">Modelling ASDRs using MixedModels.jl</a><a id="Modelling-ASDRs-using-MixedModels.jl-1"></a><a class="docs-heading-anchor-permalink" href="#Modelling-ASDRs-using-MixedModels.jl" title="Permalink"></a></h2><p>We use the <code>MixedModels.jl</code> package to fit a linear mixed-effects model to mortality data. We consider a general model with random effects specified for &#39;cgx&#39; grouping variable. <code>REML</code> (Restricted Maximum Likelihood) is employed for parameter estimation:</p><pre><code class="language-julia hljs">using MixedModels
 
 # Define the contrasts for categorical variables
 contrasts = Dict(:cgx =&gt; Grouping());
@@ -138,7 +138,7 @@ Gadfly.plot(
     Guide.xlabel(&quot;Fitted Values&quot;),
     Guide.ylabel(&quot;Residuals&quot;),
     Guide.title(&quot;Scatter Plot for Heteroskedasticity&quot;)
-)</code></pre><img src="8a88474b.svg" alt="Example block output"/><pre><code class="language-julia hljs">using Statistics
+)</code></pre><img src="3dd44811.svg" alt="Example block output"/><pre><code class="language-julia hljs">using Statistics
 # QQ plot for residuals with fitted normal distribution
 Gadfly.plot(
     x = df.residuals,
@@ -146,7 +146,7 @@ Gadfly.plot(
     Stat.qq,
     Geom.point,
     Gadfly.Theme(discrete_highlight_color=c -&gt; nothing, alphas=[0.5], point_size=2pt)
-)</code></pre><img src="2ad001d6.svg" alt="Example block output"/><h2 id="Refine-the-Model"><a class="docs-heading-anchor" href="#Refine-the-Model">Refine the Model</a><a id="Refine-the-Model-1"></a><a class="docs-heading-anchor-permalink" href="#Refine-the-Model" title="Permalink"></a></h2><pre><code class="language-julia hljs"># Filter out data points with absolute residuals outside the range [-0.10, 0.10]
+)</code></pre><img src="028041e9.svg" alt="Example block output"/><h2 id="Refine-the-Model"><a class="docs-heading-anchor" href="#Refine-the-Model">Refine the Model</a><a id="Refine-the-Model-1"></a><a class="docs-heading-anchor-permalink" href="#Refine-the-Model" title="Permalink"></a></h2><pre><code class="language-julia hljs"># Filter out data points with absolute residuals outside the range [-0.10, 0.10]
 df_filtered = df[abs.(df.residuals) .&lt;= 0.10, :]
 
 # Write the data to Arrow format with Zstandard compression
@@ -188,7 +188,7 @@ df_filtered.residuals = residuals(m2)</code></pre><pre class="documenter-example
    Guide.xlabel(&quot;Fitted Values&quot;),
    Guide.ylabel(&quot;Residuals&quot;),
    Guide.title(&quot;Scatter Plot for Heteroskedasticity&quot;)
-)</code></pre><img src="0cd66387.svg" alt="Example block output"/><pre><code class="language-julia hljs"># QQ plot for residuals
+)</code></pre><img src="e698356b.svg" alt="Example block output"/><pre><code class="language-julia hljs"># QQ plot for residuals
 Gadfly.plot(
     df_filtered,
     x=:residuals,
@@ -199,4 +199,4 @@ Gadfly.plot(
     Guide.xlabel(&quot;Theoretical Quantiles&quot;),
     Guide.ylabel(&quot;Sample Quantiles&quot;),
     Guide.title(&quot;Normal QQ Plot of Clamped Residuals&quot;)
-)</code></pre><img src="ab901d5b.svg" alt="Example block output"/><h2 id="References"><a class="docs-heading-anchor" href="#References">References</a><a id="References-1"></a><a class="docs-heading-anchor-permalink" href="#References" title="Permalink"></a></h2><p><a href="https://juliastats.org/MixedModels.jl/stable/constructors/#Examples-of-linear-mixed-effects-model-fits">Examples of linear mixed-effects model fits</a></p><p><a href="https://www.jstor.org/stable/3448650">Analysis of Variance: Why It Is More Important than Ever</a></p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../">« Home</a><a class="docs-footer-nextpage" href="../bootstrap/">Parametric bootstrap for LMEASDRs »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="auto">Automatic (OS)</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.2.1 on <span class="colophon-date" title="Sunday 14 January 2024 12:52">Sunday 14 January 2024</span>. Using Julia version 1.6.7.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+)</code></pre><img src="9e5b2379.svg" alt="Example block output"/><h2 id="References"><a class="docs-heading-anchor" href="#References">References</a><a id="References-1"></a><a class="docs-heading-anchor-permalink" href="#References" title="Permalink"></a></h2><p><a href="https://juliastats.org/MixedModels.jl/stable/constructors/#Examples-of-linear-mixed-effects-model-fits">Examples of linear mixed-effects model fits</a></p><p><a href="https://www.jstor.org/stable/3448650">Analysis of Variance: Why It Is More Important than Ever</a></p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../">« Home</a><a class="docs-footer-nextpage" href="../bootstrap/">Parametric bootstrap for LMEASDRs »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="auto">Automatic (OS)</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.2.1 on <span class="colophon-date" title="Sunday 14 January 2024 23:33">Sunday 14 January 2024</span>. Using Julia version 1.6.7.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
