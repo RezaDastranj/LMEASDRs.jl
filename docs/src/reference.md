@@ -17,7 +17,8 @@ For more details, refer to the related paper: Age-Gender-Country-Specific Death 
 
 
 # Authors
-Reza Dastranj and Martin Kolář
+> Reza Dastranj and Martin Kolář
+
 
 ## Affiliation
 Department of Mathematics and Statistics, Masaryk University, Kotlářská 2, 611 37 Brno, Czech Republic
