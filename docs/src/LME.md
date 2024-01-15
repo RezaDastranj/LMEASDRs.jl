@@ -165,18 +165,6 @@ VarCorr(m1)
 
 
 
-!!! note
-    "We define effects (or coefficients) in a multilevel model as constant if they are identical for all groups in a population and varying if they are allowed to differ from group to group."[Analysis of Variance: Why It Is More Important than Ever](https://www.jstor.org/stable/3448650)
-
-
-
-We are operating under the assumption that the relationship between age and mortality rates remains consistent across diverse groups, encompassing various countries and genders. In simpler terms, we posit that the influence of age on mortality rates is uniform across all countries and genders. Additionally, we assert that the correlation between gender and mortality rates maintains uniformity across all countries and age groups in our dataset. Consequently, we treat gender as a fixed effect, signifying our presumption that the impact of gender on mortality rates is universal and does not exhibit variability among different groups.
-
-Furthermore, we incorporate variability in the effects of each country. This acknowledgment takes into account the potential influence of unobserved country-specific factors on mortality rates. Estimates for these effects are derived from the available data. It is anticipated that the relationship between mortality rates and other variables may diverge across countries. Consequently, we designate country as a random effect.
-
-This approach aligns with the perspective outlined in "Analysis of Variance: Why It Is More Important than Ever," where effects or coefficients in a multilevel model are defined as constant if identical across all groups in a population and varying if permitted to differ from group to group. [Analysis of Variance: Why It Is More Important than Ever](https://www.jstor.org/stable/3448650)
-
-
 Determine the floating-point type used internally for the matrices, vectors, and scalars in the model. The type of 'm1' represents the internal floating-point type for parameter optimization. Currently, the NLopt package is used for optimization, allowing only Float64 for parameter vectors. In theory, other floating-point types like BigFloat or Float32 can be used, but only Float64 works in practice.
 
 
